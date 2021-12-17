@@ -8,6 +8,7 @@
 
 #include <string>
 
+
 class Item {
 protected:
     std::string name;
@@ -15,12 +16,11 @@ protected:
     std::string itemType;
 public:
     virtual ~Item() {};
-    virtual std::string &getName() = 0;
-    virtual void setName(std::string &getName) = 0;
+    virtual std::string getName() = 0;
+    virtual void setName(std::string getName) = 0;
     virtual int getCost() = 0;
     virtual void setCost(int cost) = 0;
     virtual std::string getItemType() = 0;
-
 };
 
 

@@ -12,13 +12,6 @@ class Armor : public Item{
 protected:
     int armorHealth;
 public:
-    // Override Item Class Methods
-    std::string &getName() override;
-    void setName(std::string &getName) override;
-    int getCost() override;
-    void setCost(int cost) override;
-    std::string getItemType() override;
-
     // Armor Virtual Functions
     virtual int getArmorHealth() = 0;
 };

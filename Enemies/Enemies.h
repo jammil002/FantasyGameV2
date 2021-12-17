@@ -7,15 +7,18 @@
 
 #include <string>
 
+
 class Enemies {
 protected:
-    std::string name;
+    std::string name ;
+    std::string shieldType;
     int attackDamage;
     int health;
 public:
     virtual ~Enemies() {};
-    virtual std::string &getName() = 0;
-    virtual void setName(std::string &name) = 0;
+    virtual std::string getName() = 0;
+    virtual void setName(std::string name) = 0;
+    virtual std::string getShieldType() = 0;
     virtual int getAttackDamage() = 0;
     virtual void setAttackDamage(int attackDamage) = 0;
     virtual int getHealth()= 0;

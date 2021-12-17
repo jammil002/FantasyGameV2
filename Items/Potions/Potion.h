@@ -14,14 +14,6 @@ protected:
     int healthIncrease;
     std::string potionType;
 public:
-    // Override Item Class Methods
-    ~Potion() override;
-    std::string &getName() override;
-    void setName(std::string &getName) override;
-    int getCost() override;
-    void setCost(int cost) override;
-    std::string getItemType() override;
-
     // Potion Virtual Functions
     virtual int getDamageIncrease() = 0;
     virtual int getHealthIncrease() = 0;

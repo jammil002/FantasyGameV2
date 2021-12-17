@@ -3,4 +3,4 @@ project(CST210Final)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(CST210Final Main.cpp Player.cpp Player.h Items/Item.h Items/Armor/Armor.cpp Items/Armor/Armor.h Items/Swords/Sword.cpp Items/Swords/Sword.h Items/Potions/Potion.cpp Items/Potions/Potion.h Enemies/Enemies.h Locations/Arena.cpp Locations/Arena.h Locations/Shop.cpp Locations/Shop.h)
+add_executable(CST210Final Main.cpp Game/Player.cpp Game/Player.h Items/Item.h Items/Armor/Armor.h Items/Swords/Sword.h Items/Potions/Potion.h Enemies/Enemies.h Locations/Arena.cpp Locations/Arena.h Locations/Shop.cpp Locations/Shop.h Game/Driver.cpp Game/Driver.h Enemies/Knight.cpp Enemies/Knight.h EaseOfUse/easeOfUse.cpp EaseOfUse/easeOfUse.h)

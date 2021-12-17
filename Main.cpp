@@ -1,6 +1,7 @@
-#include <iostream>
+#include "Game/Driver.h"
+#include "EaseOfUse/easeOfUse.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    //Driver startGame;
+
 }

@@ -14,13 +14,6 @@ protected:
     std::string damageType;
     int damageAmount;
 public:
-    // Override Item Class Methods
-    std::string &getName() override;
-    void setName(std::string &getName) override;
-    int getCost() override;
-    void setCost(int cost) override;
-    std::string getItemType() override;
-
     // Sword Virtual Functions
     virtual std::string &getDamageType() = 0;
     virtual void setDamageType(std::string &damageType) = 0;

@@ -7,18 +7,20 @@
 
 #include <vector>
 #include <string>
-#include "Items/Item.h"
-#include "Items/Armor/Armor.h"
-#include "Items/Swords/Sword.h"
-#include "Items/Potions/Potion.h"
-#include "Enemies/Enemies.h"
+#include <iostream>
+#include "../EaseOfUse/easeOfUse.h"
+#include "../Items/Item.h"
+#include "../Items/Armor/Armor.h"
+#include "../Items/Swords/Sword.h"
+#include "../Items/Potions/Potion.h"
+#include "../Enemies/Enemies.h"
 
 
 class Player {
 protected:
     // Inventory
     std::vector<Item*> playerInventory;
-    int const maxInventory = 6;
+    int const maxInventory = 7;
 
     // Name and Coins
     std::string name;
@@ -34,13 +36,14 @@ protected:
     int totalDamage;
 public:
     //Player Constructor
+    Player();
     Player(std::string name);
 
     // Player Actions
-    void equipArmor(Armor*);
-    void equipSword(Sword*);
-    void usePotion(Potion*);
-    void attackEnemy(Enemies*);
+    void equipArmor(Armor* armor1);
+    void equipSword(Sword* sword1);
+    void usePotion();
+    void attackEnemy(Enemies* enemy1, Sword* sword1);
     // Equipped armor raises health from baseHealth = 10.
     // Equipped sword raises baseDamage from 3.
     // Potion raises health from current health to +5;
@@ -48,9 +51,9 @@ public:
     // Player Inventory Tools
     const std::vector<Item *> &getPlayerInventory() const;
     void setPlayerInventory(const std::vector<Item *> &playerInventory);
-    void getMaxInventory();
-    void addItem(Item*);
+    void addItem(Item* item);
     void deleteItem();
+    void listInventory();
 
     // Health Tools
     int getBaseHealth() const;
@@ -69,8 +72,8 @@ public:
     void setName(const std::string &name);
 
     // Coin Tools
-    void addCoins();
-    void removeCoins(Item*);
+    void addCoins(int coinAmount);
+    void removeCoins(int cost);
 };
 
 

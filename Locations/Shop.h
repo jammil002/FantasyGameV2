@@ -6,16 +6,16 @@
 #define CST210FINAL_SHOP_H
 
 
-#include "../Player.h"
+#include "../Game/Player.h"
 
 class Shop {
 public:
     // Shop Menu
-    void shopMenu(Player *p1);
+    void shopMenu(Player &p1);
 
     // Buy and Sell Tools
-    bool buyItem(Player *p1);
-    bool sellItem(Player *p1);
+    bool buyItem(Player &p1);
+    bool sellItem(Player &p1);
 };
 
 

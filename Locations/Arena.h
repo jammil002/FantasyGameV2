@@ -6,18 +6,19 @@
 #define CST210FINAL_ARENA_H
 
 
-#include "../Player.h"
+#include "../Game/Player.h"
+#include "../Enemies/Enemies.h"
 
 class Arena {
 protected:
     int waveAmount;
 public:
     // Arena Menu
-   void arenaMenu(Player* p1);
+   void arenaMenu(Player& p1);
 
     // Arena Tools
-   void generateEnemy();
-   void giveCoins(Player* p1);
+   Enemies* generateEnemy();
+   void giveCoins(Player& p1);
 };
 
 
