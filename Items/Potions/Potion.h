@@ -10,14 +10,12 @@
 
 class Potion : public Item{
 protected:
-    int damageIncrease;
     int healthIncrease;
     std::string potionType;
 public:
     // Potion Virtual Functions
-    virtual int getDamageIncrease() = 0;
     virtual int getHealthIncrease() = 0;
-    virtual std::string &getPotionType() = 0;
+    virtual std::string getPotionType() = 0;
 };
 
 

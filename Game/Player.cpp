@@ -11,9 +11,6 @@ Player::Player(std::string name) {
     this->name = name;
     // Push back armor
     // Push back sword
-
-    // Equip Sword
-    // Equip Armor
 }
 
 // Player Actions
@@ -60,28 +57,92 @@ void Player::deleteItem() {
     int itemToDelete;
     easeOfUse e1;
     std::string answer;
+    std::cout << "----------------------------------------------" << std::endl;
     for(int i = 0; i < playerInventory.size(); i++){
         std::cout << i << ". " << playerInventory[i]->getName() << std::endl;
     }
-    std::cout << "Which item would you like to delete: ";
+    std::cout << "Delete an item (1," << playerInventory.size() << ") or Exit (9)";
     std::cin >> itemToDelete;
-    std::cout << "Are you sure you want to delete: " << playerInventory[itemToDelete-1]->getName() << std::endl;
-    std::cout << "Enter Yes or No: ";
-    std::cin >> answer;
-    answer = e1.toLower(answer);
-    if(answer == "no"){
+    if(itemToDelete == 9){return;}
+    else{
+        std::cout << "Are you sure you want to delete: " << playerInventory[itemToDelete-1]->getName() << std::endl;
+        std::cout << "Enter Yes or No: ";
+        std::cin >> answer;
+        answer = e1.toLower(answer);
+        if(answer == "no"){
+            int getAnswer;
+            std::cout << "Delete another Item (1) or Exit (9)";
+            std::cin >> getAnswer;
+            if(getAnswer == 9){return;}
+            else if(getAnswer == 1){deleteItem();}
+        }
+        if(answer == "yes"){
+            std::cout << "You have deleted: " << playerInventory[itemToDelete-1]->getName() << std::endl;
+            playerInventory.erase(playerInventory.begin() + itemToDelete-1);
+            std::cout << "----------------------------------------------" << std::endl;
+            return;
+        }
+    }
+
+}
+void Player::listInventory() {
+    int getItemNumber;
+    int getAnswer;
+    std::cout << "==============================================" << std::endl;
+    std::cout << "----------------------------------------------" << std::endl;
+    std::cout << "             Players Inventory" << std::endl;
+    for(int i = 0; i < playerInventory.size(); i++){
+        std::cout << i << ". " << playerInventory[i]->getName() << std::endl;
+    }
+    std::cout << "Enter an Item (1-6) or Exit (9): " << std::endl;
+    std::cin >> getItemNumber;
+    if(getItemNumber == 6 || getItemNumber == 5 || getItemNumber == 3 || getItemNumber == 2 || getItemNumber == 1 ){
+        if(playerInventory[getItemNumber-1]->getItemType() == "Sword"){
+            std::cout << "-" << std::endl;
+            std::cout << playerInventory[getItemNumber-1]->getName() << " > " << std::endl;
+            std::cout << "Damage Amount: " << dynamic_cast<Sword*>(playerInventory[getItemNumber-1])->getDamageAmount() << std::endl;
+            std::cout << "Damage Type: " << dynamic_cast<Sword*>(playerInventory[getItemNumber-1])->getDamageType() << std::endl;
+            std::cout << "-" << std::endl;
+
+            std::cout << "View Another Item (1) or Exit (9)";
+            std::cin >> getAnswer;
+            if(getAnswer == 9){return;}
+            else if(getAnswer == 1){listInventory();}
+        }
+        else if(playerInventory[getItemNumber-1]->getItemType() == "Armor"){
+            std::cout << "-" << std::endl;
+            std::cout << playerInventory[getItemNumber-1]->getName() << " > " << std::endl;
+            std::cout << "Armor Health: " << dynamic_cast<Armor*>(playerInventory[getItemNumber-1])->getArmorHealth() << std::endl;
+            std::cout << "-" << std::endl;
+
+            std::cout << "View Another Item (1) or Exit (9):";
+            std::cin >> getAnswer;
+            if(getAnswer == 9){return;}
+            else if(getAnswer == 1){listInventory();}
+        }
+        else if(playerInventory[getItemNumber-1]->getItemType() == "Potion"){
+            std::cout << "-" << std::endl;
+            std::cout << playerInventory[getItemNumber-1]->getName() << " > " << std::endl;
+            std::cout << "Healing Amount: " << dynamic_cast<Potion*>(playerInventory[getItemNumber-1])->getHealthIncrease() << std::endl;
+            std::cout << "-" << std::endl;
+
+            std::cout << "View Another Item (1) or Exit (9):";
+            std::cin >> getAnswer;
+            if(getAnswer == 9){return;}
+            else if(getAnswer == 1){listInventory();}
+        }
 
     }
-    if(answer == "yes")
+    else{return;}
+
+
+
 }
 void Player::addCoins(int coinAmount) {
     this->coins += coinAmount;
 }
 void Player::removeCoins(int cost) {
     this->coins -= cost;
-}
-void Player::listInventory() {
-
 }
 
 // Getter and Setters

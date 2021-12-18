@@ -15,8 +15,8 @@ protected:
     int damageAmount;
 public:
     // Sword Virtual Functions
-    virtual std::string &getDamageType() = 0;
-    virtual void setDamageType(std::string &damageType) = 0;
+    virtual std::string getDamageType() = 0;
+    virtual void setDamageType(std::string damageType) = 0;
     virtual int getDamageAmount() = 0;
 };
 

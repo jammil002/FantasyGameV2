@@ -1,12 +1,13 @@
 // Drive Class for Game
 #include "Driver.h"
+#include "../Locations/Shop.h"
 
 // Driver Constructor: simply calls startMenu method.
 Driver::Driver() {
     try{
         startMenu();
     }
-    catch(std::logic_error){
+    catch(std::exception){
         std::cout << "**********************************************" << std::endl;
         std::cout << "Entered an incorrect digit. Please try again." << std::endl;
         std::cout << "**********************************************" << std::endl;
@@ -26,6 +27,12 @@ void Driver::startMenu() {
     std::cout << "2. Load Character" << std::endl;
     std::cout << "Enter a 1 or 2: ";
     std::cin >> getInput;
+    if(getInput == 1){
+        createCharacter();
+    }
+    else if(getInput == 2){
+        loadGame();
+    }
 }
 
 // Game Menu
@@ -42,6 +49,8 @@ void Driver::createCharacter() {
     std::cin >> getName;
     std::cout << "Time to begin your journey!" << std::endl;
     std::cout << "----------------------------------------------" << std::endl;
+    std::cout << "==============================================" << std::endl;
+
     playerStorage.emplace_back(getName);
 }
 bool Driver::saveGame() {
