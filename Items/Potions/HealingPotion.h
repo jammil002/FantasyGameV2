@@ -19,7 +19,7 @@ public:
     void setCost(int cost) override;
     std::string getItemType() override;
 
-    // Potion Override
+    // Potion Method Override
     int getHealthIncrease() override;
     std::string getPotionType() override;
 };

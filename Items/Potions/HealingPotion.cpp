@@ -3,35 +3,41 @@
 //
 
 #include "HealingPotion.h"
+// Healing Potion Constructor
+HealingPotion::HealingPotion() {
+    this->name = name;
+    this->cost = 10;
+    this->itemType = "Potion";
+    this->healthIncrease = 5;
+    this->potionType = "Healing";
+}
 
-
-
+// Item Method Override
 std::string HealingPotion::getName() {
-    return std::string();
+    return this->name;
 }
-
 void HealingPotion::setName(std::string getName) {
-
+    this->name = name;
 }
-
 int HealingPotion::getCost() {
-    return 0;
+    return this->cost;
 }
-
 void HealingPotion::setCost(int cost) {
-
+    this->cost = cost;
 }
-
 std::string HealingPotion::getItemType() {
-    return std::string();
+    return this->itemType;
 }
 
+// Potion Method Override
 int HealingPotion::getHealthIncrease() {
-    return 0;
+    return healthIncrease;
 }
 
-std::string &HealingPotion::getPotionType() {
-    return <#initializer#>;
+std::string HealingPotion::getPotionType() {
+    return this->potionType;
 }
+
+
 
 
