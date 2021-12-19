@@ -3,9 +3,10 @@
 //
 
 #include "HealingPotion.h"
+
 // Healing Potion Constructor
 HealingPotion::HealingPotion() {
-    this->name = name;
+    this->name = "Healing Potion";
     this->cost = 10;
     this->itemType = "Potion";
     this->healthIncrease = 5;
@@ -16,15 +17,19 @@ HealingPotion::HealingPotion() {
 std::string HealingPotion::getName() {
     return this->name;
 }
+
 void HealingPotion::setName(std::string getName) {
     this->name = name;
 }
+
 int HealingPotion::getCost() {
     return this->cost;
 }
+
 void HealingPotion::setCost(int cost) {
     this->cost = cost;
 }
+
 std::string HealingPotion::getItemType() {
     return this->itemType;
 }

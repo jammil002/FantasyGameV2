@@ -7,15 +7,18 @@
 
 
 #include "../Game/Player.h"
+#include "../Items/Potions/HealingPotion.h"
+#include "../Items/Armor/CommonArmor.h"
+#include "../Items/Armor/LegendaryArmor.h"
+#include "../Items/Armor/ExoticArmor.h"
+#include "../Items/Swords/CommonSword.h"
+#include "../Items/Swords/LegendarySword.h"
 
 class Shop {
 public:
     // Shop Menu
     void shopMenu(Player &p1);
 
-    // Buy and Sell Tools
-    bool buyItem(Player &p1);
-    bool sellItem(Player &p1);
 };
 
 

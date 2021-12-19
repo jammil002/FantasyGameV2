@@ -4,10 +4,10 @@
 
 // Driver Constructor: simply calls startMenu method.
 Driver::Driver() {
-    try{
+    try {
         startMenu();
     }
-    catch(std::exception){
+    catch (std::exception) {
         std::cout << "**********************************************" << std::endl;
         std::cout << "Entered an incorrect digit. Please try again." << std::endl;
         std::cout << "**********************************************" << std::endl;
@@ -27,17 +27,71 @@ void Driver::startMenu() {
     std::cout << "2. Load Character" << std::endl;
     std::cout << "Enter a 1 or 2: ";
     std::cin >> getInput;
-    if(getInput == 1){
+    if (getInput == 1) {
         createCharacter();
-    }
-    else if(getInput == 2){
+    } else if (getInput == 2) {
         loadGame();
     }
 }
 
 // Game Menu
 void Driver::gameMenu() {
+    int menuChoice;
+    std::cout << "==============================================" << std::endl;
+    std::cout << "----------------------------------------------" << std::endl;
+    if (playerStorage[0].getName().ends_with('s')) {
+        std::cout << "                 " << playerStorage[0].getName() << "' Menu" << std::endl;
+    } else {
+        std::cout << "                 " << playerStorage[0].getName() << "'s Menu" << std::endl;
+    }
+    std::cout << "1. Open Inventory" << std::endl;
+    std::cout << "2. Travel" << std::endl;
+    std::cout << "3. Save" << std::endl;
+    std::cout << "4. Quit" << std::endl;
+    std::cout << "Enter your choice (1-4): ";
+    std::cin >> menuChoice;
+    switch (menuChoice) {
+        case 1:
+            std::cout << "Opening Inventory... " << std::endl;
+            std::cout << "----------------------------------------------" << std::endl;
+            playerStorage[0].listInventory();
 
+            std::cout << "----------------------------------------------" << std::endl;
+            gameMenu();
+            break;
+        case 2:
+            std::cout << "----------------------------------------------" << std::endl;
+            std::cout << "Where would you like to travel? " << std::endl;
+            std::cout << "1. Arena" << std::endl;
+            std::cout << "2. Shop" << std::endl;
+            while (true) {
+                std::cout << "Enter 1 or 2: ";
+                std::cin >> menuChoice;
+                if (menuChoice == 1) {
+                    //Arena::playerArena(playerVector[0]);
+                    gameMenu();
+                    break;
+                } else if (menuChoice == 2) {
+                    Shop s1;
+                    std::cout << "----------------------------------------------" << std::endl;
+                    s1.shopMenu(playerStorage[0]);
+                    gameMenu();
+                    break;
+                }
+            }
+            break;
+        case 3:
+            saveGame();
+            break;
+        case 4:
+            std::cout << "Quiting " << std::endl;
+            //quitGame();
+            break;
+        default:
+            std::cout << "Please choose 1 - 4..." << std::endl;
+            gameMenu();
+            break;
+    }
 }
 
 // Character Creation, Saving, and Loading Methods.
@@ -49,20 +103,57 @@ void Driver::createCharacter() {
     std::cin >> getName;
     std::cout << "Time to begin your journey!" << std::endl;
     std::cout << "----------------------------------------------" << std::endl;
-    std::cout << "==============================================" << std::endl;
-
     playerStorage.emplace_back(getName);
+    gameMenu();
 }
+
 bool Driver::saveGame() {
-    return false;
+    std::cout << "----------------------------------------------" << std::endl;
+    std::cout << "Saving the game...." << std::endl;
+    newFile.open("saveFile.txt", std::ios::app | std::ios::in | std::ios::out);
+    newFile << playerStorage[0].getName() << "  " << playerStorage[0].getCoins();
+    for (int i = 0; i < playerStorage[0].getPlayerInventory().size(); i++) {
+        if (playerStorage[0].getPlayerInventory().at(i)->getItemType() == "Sword") {
+            newFile << "    " << playerStorage[0].getPlayerInventory().at(i)->getName() << " ";
+            newFile << dynamic_cast<Sword *>(playerStorage[0].getPlayerInventory().at(i))->getDamageType();
+        } else {
+            newFile << "    " << playerStorage[0].getPlayerInventory().at(i)->getName();
+        }
+        playerStorage[0].getPlayerInventory().at(i)->getName();
+    }
+    newFile << std::endl;
+    newFile.close();
+    std::cout << "----------------------------------------------" << std::endl;
+    gameMenu();
+    return true;
 }
 
 bool Driver::loadGame() {
-    return false;
+    std::string tempString;
+    int playerNumber = 1;
+    int tempNum;
+
+    std::cout << "----------------------------------------------" << std::endl;
+    std::cout << "What player would you like to load: " << std::endl;
+    readSave.open("saveFile.txt");
+
+    if (readSave.is_open()) {
+        while (getline(readSave, tempString)) {
+            std::cout << playerNumber << ". " << tempString << '\n';
+            playerNumber++;
+        }
+        //myfile.close();
+    }
+    std::cout << "Enter the number of the player you would like to load: ";
+    std::cin >> tempNum;
+
+
+    std::cout << "----------------------------------------------" << std::endl;
+    return true;
 }
 
 // Getters and Setters
-std::vector<Player> &Driver::getPlayerStorage(){
+std::vector<Player> &Driver::getPlayerStorage() {
     return this->playerStorage;
 }
 

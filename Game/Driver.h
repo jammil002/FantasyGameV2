@@ -4,6 +4,7 @@
 
 #ifndef CST210FINAL_DRIVER_H
 #define CST210FINAL_DRIVER_H
+
 #include <vector>
 #include <fstream>
 #include <iostream>
@@ -15,12 +16,14 @@ protected:
     // Vector that stores new and loaded players.
     std::vector<Player> playerStorage;
 
-    // Save file.
-    std::fstream newFile {"saveFile.txt"};
+    // Save file and load file.
+    std::fstream newFile;
+    std::ifstream readSave;
 public:
     // Driver Constructor
     Driver();
-    // Getter for playerStorage
+
+    // Getter for playerStoragev
     std::vector<Player> &getPlayerStorage();
 
     // Load Menu
@@ -31,7 +34,9 @@ public:
 
     //Methods to create a character, save, and load.
     void createCharacter();
+
     bool saveGame();
+
     bool loadGame();
 };
 
