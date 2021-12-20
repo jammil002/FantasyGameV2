@@ -23,7 +23,7 @@ public:
     // Driver Constructor
     Driver();
 
-    // Getter for playerStoragev
+    // Getter for player Storage
     std::vector<Player> &getPlayerStorage();
 
     // Load Menu

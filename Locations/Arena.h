@@ -8,17 +8,28 @@
 
 #include "../Game/Player.h"
 #include "../Enemies/Enemies.h"
+#include "../Enemies/Acolyte.h"
+#include "../Enemies/Knight.h"
+#include "../Enemies/Ogre.h"
+#include "../Enemies/Wizard.h"
+#include "../Enemies/Thrall.h"
+#include <ctime>
+#include <cstdlib>
 
 class Arena {
-protected:
+private:
     int waveAmount;
-public:
-    // Arena Menu
-   void arenaMenu(Player& p1);
 
     // Arena Tools
-   Enemies* generateEnemy();
-   void giveCoins(Player& p1);
+    Enemies *generateEnemy();
+
+    void giveCoins(Player &p1);
+
+public:
+    // Arena Menu
+    void arenaMenu(Player &p1);
+
+
 };
 
 

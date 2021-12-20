@@ -1,6 +1,7 @@
 // Drive Class for Game
 #include "Driver.h"
 #include "../Locations/Shop.h"
+#include "../Locations/Arena.h"
 
 // Driver Constructor: simply calls startMenu method.
 Driver::Driver() {
@@ -68,7 +69,8 @@ void Driver::gameMenu() {
                 std::cout << "Enter 1 or 2: ";
                 std::cin >> menuChoice;
                 if (menuChoice == 1) {
-                    //Arena::playerArena(playerVector[0]);
+                    Arena a1;
+                    a1.arenaMenu(playerStorage[0]);
                     gameMenu();
                     break;
                 } else if (menuChoice == 2) {
@@ -110,14 +112,14 @@ void Driver::createCharacter() {
 bool Driver::saveGame() {
     std::cout << "----------------------------------------------" << std::endl;
     std::cout << "Saving the game...." << std::endl;
-    newFile.open("saveFile.txt", std::ios::app | std::ios::in | std::ios::out);
-    newFile << playerStorage[0].getName() << "  " << playerStorage[0].getCoins();
+    newFile.open("saveFile.txt", std::ios::trunc | std::ios::in | std::ios::out);
+    newFile << playerStorage[0].getName() << playerStorage[0].getCoins();
     for (int i = 0; i < playerStorage[0].getPlayerInventory().size(); i++) {
         if (playerStorage[0].getPlayerInventory().at(i)->getItemType() == "Sword") {
-            newFile << "    " << playerStorage[0].getPlayerInventory().at(i)->getName() << " ";
+            newFile << playerStorage[0].getPlayerInventory().at(i)->getName() << "\n";
             newFile << dynamic_cast<Sword *>(playerStorage[0].getPlayerInventory().at(i))->getDamageType();
         } else {
-            newFile << "    " << playerStorage[0].getPlayerInventory().at(i)->getName();
+            newFile << "\n" << playerStorage[0].getPlayerInventory().at(i)->getName();
         }
         playerStorage[0].getPlayerInventory().at(i)->getName();
     }
@@ -132,10 +134,8 @@ bool Driver::loadGame() {
     std::string tempString;
     int playerNumber = 1;
     int tempNum;
-
-    std::cout << "----------------------------------------------" << std::endl;
-    std::cout << "What player would you like to load: " << std::endl;
-    readSave.open("saveFile.txt");
+    int playerPart = 0;
+    int loopAmount = 0;
 
     if (readSave.is_open()) {
         while (getline(readSave, tempString)) {
@@ -146,6 +146,21 @@ bool Driver::loadGame() {
     }
     std::cout << "Enter the number of the player you would like to load: ";
     std::cin >> tempNum;
+    if (readSave.is_open()) {
+        while (getline(readSave, tempString)) {
+            if (tempNum - 1 == loopAmount) {
+                for (int i = 0; i < tempString.size(); i++) {
+                    if (tempString == "\t") {
+
+                    }
+
+                }
+
+            }
+
+        }
+        //myfile.close();
+    }
 
 
     std::cout << "----------------------------------------------" << std::endl;

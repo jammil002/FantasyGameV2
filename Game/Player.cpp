@@ -120,7 +120,7 @@ void Player::listInventory() {
     for (int i = 0; i < playerInventory.size(); i++) {
         std::cout << i + 1 << ". " << playerInventory[i]->getName() << std::endl;
     }
-    std::cout << "Enter an Item (1-6) or Exit (9): " << std::endl;
+    std::cout << "Enter an Item (1-6) or Exit (9): ";
     std::cin >> getItemNumber;
     if (getItemNumber == 6 || getItemNumber == 5 || getItemNumber == 3 || getItemNumber == 2 || getItemNumber == 1) {
         if (playerInventory[getItemNumber - 1]->getItemType() == "Sword") {
