@@ -5,9 +5,10 @@
 #include "Acolyte.h"
 
 // Constructor to create the Acolyte
-Acolyte::Acolyte(std::string name, std::string shieldType, int health) {
+Acolyte::Acolyte(std::string name, std::string shieldType, int health, int attackDamage) {
     this->name = name;
     this->shieldType = shieldType;
+    this->attackDamage = attackDamage;
     this->health = health;
 }
 

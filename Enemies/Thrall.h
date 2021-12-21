@@ -11,7 +11,7 @@
 class Thrall : public Enemies {
 public:
     // Constructor to create Wizard
-    Thrall(std::string name, std::string shieldType, int health);
+    Thrall(std::string name, std::string shieldType, int health, int attackDamage);
 
     // Enemies Override Methods
     std::string getName() override;

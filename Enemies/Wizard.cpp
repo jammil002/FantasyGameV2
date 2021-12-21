@@ -5,8 +5,9 @@
 #include "Wizard.h"
 
 // Constructor to create the Wizard
-Wizard::Wizard(std::string name, std::string shieldType, int health) {
+Wizard::Wizard(std::string name, std::string shieldType, int health, int attackDamage) {
     this->name = name;
+    this->attackDamage = attackDamage;
     this->shieldType = shieldType;
     this->health = health;
 }

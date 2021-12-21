@@ -11,15 +11,21 @@
 class Knight : public Enemies {
 public:
     // Constructor to create Knight
-    Knight(std::string name, std::string shieldType, int health);
+    Knight(std::string name, std::string shieldType, int health, int attackDamage);
 
     // Enemies Override Methods
     std::string getName() override;
+
     void setName(std::string name) override;
+
     std::string getShieldType() override;
+
     int getAttackDamage() override;
+
     void setAttackDamage(int attackDamage) override;
+
     int getHealth() override;
+
     void setHealth(int health) override;
 };
 

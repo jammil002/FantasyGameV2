@@ -1,7 +1,11 @@
 // Drive Class for Game
+#include <sstream>
 #include "Driver.h"
 #include "../Locations/Shop.h"
 #include "../Locations/Arena.h"
+#include "../Items/Armor/StarterArmor.h"
+#include "../Items/Swords/StarterSword.h"
+#include "../Items/Swords/ExoticSword.h"
 
 // Driver Constructor: simply calls startMenu method.
 Driver::Driver() {
@@ -112,12 +116,12 @@ void Driver::createCharacter() {
 bool Driver::saveGame() {
     std::cout << "----------------------------------------------" << std::endl;
     std::cout << "Saving the game...." << std::endl;
-    newFile.open("saveFile.txt", std::ios::trunc | std::ios::in | std::ios::out);
-    newFile << playerStorage[0].getName() << playerStorage[0].getCoins();
+    newFile.open("saveFile.txt");
+    newFile << playerStorage[0].getName() << "\n" << playerStorage[0].getCoins();
     for (int i = 0; i < playerStorage[0].getPlayerInventory().size(); i++) {
         if (playerStorage[0].getPlayerInventory().at(i)->getItemType() == "Sword") {
-            newFile << playerStorage[0].getPlayerInventory().at(i)->getName() << "\n";
-            newFile << dynamic_cast<Sword *>(playerStorage[0].getPlayerInventory().at(i))->getDamageType();
+            newFile << "\n" << playerStorage[0].getPlayerInventory().at(i)->getName() << '\t'
+                    << dynamic_cast<Sword *>(playerStorage[0].getPlayerInventory().at(i))->getDamageType();
         } else {
             newFile << "\n" << playerStorage[0].getPlayerInventory().at(i)->getName();
         }
@@ -132,38 +136,196 @@ bool Driver::saveGame() {
 
 bool Driver::loadGame() {
     std::string tempString;
-    int playerNumber = 1;
-    int tempNum;
-    int playerPart = 0;
-    int loopAmount = 0;
-
+    int loopPlacement = 1;
+    readSave.open("saveFile.txt");
     if (readSave.is_open()) {
         while (getline(readSave, tempString)) {
-            std::cout << playerNumber << ". " << tempString << '\n';
-            playerNumber++;
-        }
-        //myfile.close();
-    }
-    std::cout << "Enter the number of the player you would like to load: ";
-    std::cin >> tempNum;
-    if (readSave.is_open()) {
-        while (getline(readSave, tempString)) {
-            if (tempNum - 1 == loopAmount) {
+            if (loopPlacement == 1) {
+                playerStorage.emplace_back();
+                playerStorage[0].setName(tempString);
+                loopPlacement++;
+            } else if (loopPlacement == 2) {
+                int coins = std::stoi(tempString);
+                playerStorage[1].setCoins(coins);
+                tempString = "";
+                loopPlacement++;
+            } else if (loopPlacement == 3) {
+                bool itemAttributes = false;
+                std::string itemName;
+                std::string itemInformation;
                 for (int i = 0; i < tempString.size(); i++) {
-                    if (tempString == "\t") {
-
+                    if (tempString[i] == '\t') {
+                        itemAttributes = true;
                     }
-
+                    if (!itemAttributes) {
+                        itemName.push_back(tempString[i]);
+                    } else {
+                        itemInformation.push_back(tempString[i]);
+                    }
                 }
-
+                if (itemName == "Starter Sword") {
+                    Item *starterSword = new StarterSword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(starterSword);
+                } else if (itemName == "Common Sword") {
+                    Item *commonSword = new CommonSword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(commonSword);
+                } else if (itemName == "Legendary Sword") {
+                    Item *legendarySword = new LegendarySword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(legendarySword);
+                } else if (itemName == "Exotic Sword") {
+                    Item *exoticSword = new ExoticSword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(exoticSword);
+                } else if (itemName == "Starter Armor") {
+                    Item *starterArmor = new StarterArmor;
+                    playerStorage[0].getPlayerInventory().push_back(starterArmor);
+                } else if (itemName == "Common Armor") {
+                    Item *commonArmor = new CommonArmor;
+                    playerStorage[0].getPlayerInventory().push_back(commonArmor);
+                } else if (itemName == "Legendary Armor") {
+                    Item *legendaryArmor = new LegendaryArmor;
+                    playerStorage[0].getPlayerInventory().push_back(legendaryArmor);
+                } else if (itemName == "Exotic Armor") {
+                    Item *exoticArmor = new ExoticArmor;
+                    playerStorage[0].getPlayerInventory().push_back(exoticArmor);
+                } else if (itemName == "Healing Potion") {
+                    Item *healingPotion = new HealingPotion;
+                    playerStorage[0].getPlayerInventory().push_back(healingPotion);
+                }
+                loopPlacement++;
+            } else if (loopPlacement == 4) {
+                bool itemAttributes = false;
+                std::string itemName;
+                std::string itemInformation;
+                for (int i = 0; i < tempString.size(); i++) {
+                    if (tempString[i] == '\t') {
+                        itemAttributes = true;
+                    }
+                    if (!itemAttributes) {
+                        itemName.push_back(tempString[i]);
+                    } else {
+                        itemInformation.push_back(tempString[i]);
+                    }
+                }
+                if (itemName == "Starter Sword") {
+                    Item *starterSword = new StarterSword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(starterSword);
+                } else if (itemName == "Common Sword") {
+                    Item *commonSword = new CommonSword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(commonSword);
+                } else if (itemName == "Legendary Sword") {
+                    Item *legendarySword = new LegendarySword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(legendarySword);
+                } else if (itemName == "Exotic Sword") {
+                    Item *exoticSword = new ExoticSword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(exoticSword);
+                } else if (itemName == "Starter Armor") {
+                    Item *starterArmor = new StarterArmor;
+                    playerStorage[0].getPlayerInventory().push_back(starterArmor);
+                } else if (itemName == "Common Armor") {
+                    Item *commonArmor = new CommonArmor;
+                    playerStorage[0].getPlayerInventory().push_back(commonArmor);
+                } else if (itemName == "Legendary Armor") {
+                    Item *legendaryArmor = new LegendaryArmor;
+                    playerStorage[0].getPlayerInventory().push_back(legendaryArmor);
+                } else if (itemName == "Exotic Armor") {
+                    Item *exoticArmor = new ExoticArmor;
+                    playerStorage[0].getPlayerInventory().push_back(exoticArmor);
+                } else if (itemName == "Healing Potion") {
+                    Item *healingPotion = new HealingPotion;
+                    playerStorage[0].getPlayerInventory().push_back(healingPotion);
+                }
+                loopPlacement++;
+            } else if (loopPlacement == 5) {
+                bool itemAttributes = false;
+                std::string itemName;
+                std::string itemInformation;
+                for (int i = 0; i < tempString.size(); i++) {
+                    if (tempString[i] == '\t') {
+                        itemAttributes = true;
+                    }
+                    if (!itemAttributes) {
+                        itemName.push_back(tempString[i]);
+                    } else {
+                        itemInformation.push_back(tempString[i]);
+                    }
+                }
+                if (itemName == "Starter Sword") {
+                    Item *starterSword = new StarterSword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(starterSword);
+                } else if (itemName == "Common Sword") {
+                    Item *commonSword = new CommonSword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(commonSword);
+                } else if (itemName == "Legendary Sword") {
+                    Item *legendarySword = new LegendarySword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(legendarySword);
+                } else if (itemName == "Exotic Sword") {
+                    Item *exoticSword = new ExoticSword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(exoticSword);
+                } else if (itemName == "Starter Armor") {
+                    Item *starterArmor = new StarterArmor;
+                    playerStorage[0].getPlayerInventory().push_back(starterArmor);
+                } else if (itemName == "Common Armor") {
+                    Item *commonArmor = new CommonArmor;
+                    playerStorage[0].getPlayerInventory().push_back(commonArmor);
+                } else if (itemName == "Legendary Armor") {
+                    Item *legendaryArmor = new LegendaryArmor;
+                    playerStorage[0].getPlayerInventory().push_back(legendaryArmor);
+                } else if (itemName == "Exotic Armor") {
+                    Item *exoticArmor = new ExoticArmor;
+                    playerStorage[0].getPlayerInventory().push_back(exoticArmor);
+                } else if (itemName == "Healing Potion") {
+                    Item *healingPotion = new HealingPotion;
+                    playerStorage[0].getPlayerInventory().push_back(healingPotion);
+                }
+                loopPlacement++;
+            } else if (loopPlacement == 6) {
+                bool itemAttributes = false;
+                std::string itemName;
+                std::string itemInformation;
+                for (int i = 0; i < tempString.size(); i++) {
+                    if (tempString[i] == '\t') {
+                        itemAttributes = true;
+                    }
+                    if (!itemAttributes) {
+                        itemName.push_back(tempString[i]);
+                    } else {
+                        itemInformation.push_back(tempString[i]);
+                    }
+                }
+                if (itemName == "Starter Sword") {
+                    Item *starterSword = new StarterSword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(starterSword);
+                } else if (itemName == "Common Sword") {
+                    Item *commonSword = new CommonSword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(commonSword);
+                } else if (itemName == "Legendary Sword") {
+                    Item *legendarySword = new LegendarySword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(legendarySword);
+                } else if (itemName == "Exotic Sword") {
+                    Item *exoticSword = new ExoticSword(itemInformation);
+                    playerStorage[0].getPlayerInventory().push_back(exoticSword);
+                } else if (itemName == "Starter Armor") {
+                    Item *starterArmor = new StarterArmor;
+                    playerStorage[0].getPlayerInventory().push_back(starterArmor);
+                } else if (itemName == "Common Armor") {
+                    Item *commonArmor = new CommonArmor;
+                    playerStorage[0].getPlayerInventory().push_back(commonArmor);
+                } else if (itemName == "Legendary Armor") {
+                    Item *legendaryArmor = new LegendaryArmor;
+                    playerStorage[0].getPlayerInventory().push_back(legendaryArmor);
+                } else if (itemName == "Exotic Armor") {
+                    Item *exoticArmor = new ExoticArmor;
+                    playerStorage[0].getPlayerInventory().push_back(exoticArmor);
+                } else if (itemName == "Healing Potion") {
+                    Item *healingPotion = new HealingPotion;
+                    playerStorage[0].getPlayerInventory().push_back(healingPotion);
+                }
+                loopPlacement++;
             }
-
         }
-        //myfile.close();
     }
 
-
-    std::cout << "----------------------------------------------" << std::endl;
+    gameMenu();
     return true;
 }
 

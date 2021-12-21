@@ -1,11 +1,13 @@
 //
 
 #include "Knight.h"
+
 // Constructor to create the Knight
-Knight::Knight(std::string name, std::string shieldType, int health) {
+Knight::Knight(std::string name, std::string shieldType, int health, int attackDamage) {
     this->name = name;
-    this-> shieldType = shieldType;
-    this-> health = health;
+    this->attackDamage = attackDamage;
+    this->shieldType = shieldType;
+    this->health = health;
 }
 
 // Override Methods

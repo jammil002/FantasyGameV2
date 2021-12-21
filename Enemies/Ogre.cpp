@@ -5,8 +5,9 @@
 #include "Ogre.h"
 
 // Constructor to create the Ogre
-Ogre::Ogre(std::string name, std::string shieldType, int health) {
+Ogre::Ogre(std::string name, std::string shieldType, int health, int attackDamage) {
     this->name = name;
+    this->attackDamage = attackDamage;
     this->shieldType = shieldType;
     this->health = health;
 }

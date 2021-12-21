@@ -45,10 +45,11 @@ void Player::equipSword(Sword *sword1) {
 void Player::attackEnemy(Enemies *enemy1, Sword *sword1) {
     if (enemy1->getShieldType() == sword1->getDamageType()) {
         std::cout << "Element Types Match! Damage is doubled!" << std::endl;
-        std::cout << "The " << enemy1->getName() << " took this much damage: " << (totalDamage * 2) << std::endl;
-        enemy1->setHealth(enemy1->getHealth() - (totalDamage * 2));
+        std::cout << "The " << enemy1->getName() << " took this much damage: " << (sword1->getDamageAmount() * 2)
+                  << std::endl;
+        enemy1->setHealth(enemy1->getHealth() - (sword1->getDamageAmount() * 2));
     }
-    enemy1->setHealth(enemy1->getHealth() - totalDamage);
+    enemy1->setHealth(enemy1->getHealth() - getTotalDamage());
 }
 
 void Player::usePotion() {
@@ -174,7 +175,7 @@ void Player::removeCoins(int cost) {
 }
 
 // Getter and Setters
-const std::vector<Item *> &Player::getPlayerInventory() const {
+std::vector<Item *> &Player::getPlayerInventory() {
     return playerInventory;
 }
 

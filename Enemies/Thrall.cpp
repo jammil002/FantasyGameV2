@@ -5,8 +5,9 @@
 #include "Thrall.h"
 
 // Constructor to create the Thrall
-Thrall::Thrall(std::string name, std::string shieldType, int health) {
+Thrall::Thrall(std::string name, std::string shieldType, int health, int attackDamage) {
     this->name = name;
+    this->attackDamage = attackDamage;
     this->shieldType = shieldType;
     this->health = health;
 }

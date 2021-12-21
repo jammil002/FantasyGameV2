@@ -18,7 +18,8 @@
 
 class Arena {
 private:
-    int waveAmount;
+    int waveAmount = 1;
+    std::vector<Enemies *> enemyStorage;
 
     // Arena Tools
     Enemies *generateEnemy();

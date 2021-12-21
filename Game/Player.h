@@ -53,7 +53,7 @@ public:
     // Potion raises health from current health to +5;
 
     // Player Inventory Tools
-    const std::vector<Item *> &getPlayerInventory() const;
+    std::vector<Item *> &getPlayerInventory();
 
     void setPlayerInventory(const std::vector<Item *> &playerInventory);
 

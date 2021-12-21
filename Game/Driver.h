@@ -17,7 +17,7 @@ protected:
     std::vector<Player> playerStorage;
 
     // Save file and load file.
-    std::fstream newFile;
+    std::ofstream newFile;
     std::ifstream readSave;
 public:
     // Driver Constructor

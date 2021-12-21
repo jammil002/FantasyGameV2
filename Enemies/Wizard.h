@@ -11,7 +11,7 @@
 class Wizard : public Enemies {
 public:
     // Constructor to create Wizard
-    Wizard(std::string name, std::string shieldType, int health);
+    Wizard(std::string name, std::string shieldType, int health, int attackDamage);
 
     // Enemies Override Methods
     std::string getName() override;

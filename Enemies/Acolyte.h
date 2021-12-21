@@ -11,7 +11,7 @@
 class Acolyte : public Enemies {
 public:
     // Constructor to create Knight
-    Acolyte(std::string name, std::string shieldType, int health);
+    Acolyte(std::string name, std::string shieldType, int health, int damage);
 
     // Enemies Override Methods
     std::string getName() override;

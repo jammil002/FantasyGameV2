@@ -11,7 +11,7 @@
 class Ogre : public Enemies {
 public:
     // Constructor to create Wizard
-    Ogre(std::string name, std::string shieldType, int health);
+    Ogre(std::string name, std::string shieldType, int health, int attackDamage);
 
     // Enemies Override Methods
     std::string getName() override;
