@@ -57,10 +57,7 @@ void Driver::gameMenu() {
     std::cin >> menuChoice;
     switch (menuChoice) {
         case 1:
-            std::cout << "Opening Inventory... " << std::endl;
-            std::cout << "----------------------------------------------" << std::endl;
             playerStorage[0].listInventory();
-
             std::cout << "----------------------------------------------" << std::endl;
             gameMenu();
             break;
@@ -108,7 +105,6 @@ void Driver::createCharacter() {
     std::cout << "Enter name: ";
     std::cin >> getName;
     std::cout << "Time to begin your journey!" << std::endl;
-    std::cout << "----------------------------------------------" << std::endl;
     playerStorage.emplace_back(getName);
     gameMenu();
 }

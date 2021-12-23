@@ -39,9 +39,6 @@ int HealingPotion::getHealthIncrease() {
     return healthIncrease;
 }
 
-std::string HealingPotion::getPotionType() {
-    return this->potionType;
-}
 
 
 

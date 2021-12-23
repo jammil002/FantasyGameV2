@@ -35,7 +35,7 @@ Player::Player(std::string name) {
 // Player Actions
 void Player::equipArmor(Armor *armor1) {
     totalHealth = armor1->getArmorHealth() + baseHealth;
-    totalHealth = maxHealth;
+    this->totalHealth = this->maxHealth;
 }
 
 void Player::equipSword(Sword *sword1) {
@@ -49,16 +49,19 @@ void Player::attackEnemy(Enemies *enemy1, Sword *sword1) {
                   << std::endl;
         enemy1->setHealth(enemy1->getHealth() - (sword1->getDamageAmount() * 2));
     }
-    enemy1->setHealth(enemy1->getHealth() - getTotalDamage());
+    enemy1->setHealth(enemy1->getHealth() - sword1->getDamageAmount());
 }
 
 void Player::usePotion() {
-    int potionLocation;
     for (int i = 0; i < playerInventory.size(); i++) {
         if (playerInventory[i]->getItemType() == "Potion") {
-            std::cout << i << ". " << playerInventory[i]->getName();
+            totalHealth += dynamic_cast<Potion *>(playerInventory[i])->getHealthIncrease();
+            playerInventory.erase(playerInventory.begin() + i);
+            std::cout << "You have used a healing potion." << std::endl;
+            return;
         }
     }
+    std::cout << "You do not have a healing potion." << std::endl;
 }
 
 // Player Inventory Tools

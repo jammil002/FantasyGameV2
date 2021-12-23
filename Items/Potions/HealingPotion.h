@@ -8,20 +8,23 @@
 
 #include "Potion.h"
 
-class HealingPotion : public Potion{
+class HealingPotion : public Potion {
 public:
     HealingPotion();
 
     // Item Method Override
     std::string getName() override;
+
     void setName(std::string getName) override;
+
     int getCost() override;
+
     void setCost(int cost) override;
+
     std::string getItemType() override;
 
     // Potion Method Override
     int getHealthIncrease() override;
-    std::string getPotionType() override;
 };
 
 

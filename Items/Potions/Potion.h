@@ -8,14 +8,13 @@
 
 #include "../Item.h"
 
-class Potion : public Item{
+class Potion : public Item {
 protected:
     int healthIncrease;
     std::string potionType;
 public:
     // Potion Virtual Functions
     virtual int getHealthIncrease() = 0;
-    virtual std::string getPotionType() = 0;
 };
 
 
